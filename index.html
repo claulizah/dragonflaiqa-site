@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DragonflAI QA — Claudia Acosta</title>
+<meta name="description" content="QA inteligente + Desarrollo ágil + Release seguro. QA Engineer, Release Manager y desarrolladora de aplicaciones.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F6F8F6;
+    --paper-2:#EEF2F0;
+    --ink:#15211E;
+    --ink-2:#3E4E49;
+    --line:#DCE3E0;
+    --pass:#1F9D74;
+    --pass-bg:#E3F5EC;
+    --running:#C98A2E;
+    --running-bg:#F7EDDD;
+    --alert:#C0392B;
+    --alert-bg:#F9E7E4;
+    --violet:#6B3FA0;
+    --violet-bg:#F0E9F7;
+    --white:#FFFFFF;
+    --radius:10px;
+    --mono:'IBM Plex Mono',monospace;
+    --display:'Space Grotesk',sans-serif;
+    --body:'Inter',sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--paper);color:var(--ink);
+    font-family:var(--body);font-size:16px;line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    background-image:
+      radial-gradient(ellipse 900px 500px at 15% -5%, rgba(31,157,116,.07), transparent 60%),
+      radial-gradient(ellipse 700px 500px at 100% 10%, rgba(107,63,160,.05), transparent 55%);
+    background-repeat:no-repeat;
+  }
+  a{color:inherit}
+  img,svg{display:block;max-width:100%}
+  :focus-visible{outline:2.5px solid var(--pass);outline-offset:3px}
+
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+
+  /* ── scroll reveal ── */
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+  .reveal.in{opacity:1;transform:translateY(0)}
+  @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+
+  /* ── eyebrow tag (git-path style) ── */
+  .eyebrow{
+    font-family:var(--mono);font-size:12.5px;letter-spacing:.02em;
+    color:var(--ink-2);display:flex;align-items:center;gap:8px;margin-bottom:14px;
+  }
+  .eyebrow::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--pass);flex-shrink:0}
+
+  /* ── status pill ── */
+  .pill{
+    display:inline-flex;align-items:center;gap:6px;
+    font-family:var(--mono);font-size:12px;font-weight:600;
+    padding:4px 10px;border-radius:100px;letter-spacing:.02em;
+  }
+  .pill.pass{background:var(--pass-bg);color:var(--pass)}
+  .pill.running{background:var(--running-bg);color:var(--running)}
+  .pill.alert{background:var(--alert-bg);color:var(--alert)}
+  .pill .dot{width:6px;height:6px;border-radius:50%;background:currentColor}
+  .pill.running .dot{animation:blink 1.4s ease-in-out infinite}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+
+  /* ══ NAV ══ */
+  header{
+    position:sticky;top:0;z-index:50;background:rgba(246,248,246,.88);
+    backdrop-filter:blur(10px);border-bottom:1px solid var(--line);
+  }
+  nav{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;max-width:1080px;margin:0 auto}
+  .brand{font-family:var(--display);font-weight:700;font-size:19px;letter-spacing:-.01em}
+  .brand span{color:var(--pass)}
+  .nav-links{display:flex;gap:28px;font-size:14px;font-weight:500}
+  .nav-links a{text-decoration:none;color:var(--ink-2);transition:color .15s}
+  .nav-links a:hover{color:var(--ink)}
+  .nav-cta{
+    font-family:var(--mono);font-size:13px;font-weight:600;
+    background:var(--ink);color:var(--paper);padding:9px 16px;border-radius:8px;
+    text-decoration:none;transition:transform .15s;
+  }
+  .nav-cta:hover{transform:translateY(-1px)}
+  @media(max-width:720px){.nav-links{display:none}}
+
+  /* ══ HERO ══ */
+  .hero{padding:88px 0 64px}
+  .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
+  @media(max-width:860px){.hero-grid{grid-template-columns:1fr;gap:40px}.hero{padding:52px 0 40px}}
+
+  .hero h1{
+    font-family:var(--display);font-size:46px;line-height:1.08;font-weight:700;
+    letter-spacing:-.02em;margin:0 0 18px;
+  }
+  @media(max-width:860px){.hero h1{font-size:34px}}
+  .hero h1 em{font-style:normal;color:var(--pass)}
+  .hero .lede{font-size:17px;color:var(--ink-2);max-width:46ch;margin:0 0 30px}
+  .hero-ctas{display:flex;gap:12px;flex-wrap:wrap}
+  .btn{
+    font-family:var(--body);font-weight:600;font-size:14.5px;
+    padding:13px 22px;border-radius:9px;text-decoration:none;
+    display:inline-flex;align-items:center;gap:8px;transition:transform .15s,box-shadow .15s;
+  }
+  .btn-primary{background:var(--ink);color:var(--paper)}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(21,33,30,.18)}
+  .btn-ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+  .btn-ghost:hover{border-color:var(--ink)}
+
+  /* signature: build-status panel */
+  .status-panel{
+    background:var(--ink);border-radius:14px;padding:22px 22px 18px;
+    box-shadow:0 24px 60px rgba(21,33,30,.22);
+  }
+  .status-panel-head{
+    display:flex;justify-content:space-between;align-items:center;
+    font-family:var(--mono);font-size:12px;color:#9FB3AC;margin-bottom:16px;
+    border-bottom:1px solid rgba(255,255,255,.1);padding-bottom:14px;
+  }
+  .status-panel-head b{color:#EAF2F0;font-weight:600}
+  .check-row{
+    display:flex;align-items:center;gap:12px;padding:10px 0;
+    font-family:var(--mono);font-size:13.5px;color:#D7E4E0;
+    opacity:0;transform:translateX(-8px);
+    animation:checkIn .45s ease forwards;
+  }
+  .check-row:nth-child(1){animation-delay:.15s}
+  .check-row:nth-child(2){animation-delay:.5s}
+  .check-row:nth-child(3){animation-delay:.85s}
+  .check-row:nth-child(4){animation-delay:1.2s}
+  @keyframes checkIn{to{opacity:1;transform:translateX(0)}}
+  .check-icon{width:16px;flex-shrink:0;font-size:14px}
+  .check-icon.ok{color:var(--pass)}
+  .check-icon.run{color:var(--running)}
+  .check-label{flex:1}
+  .check-sub{color:#6E8079;font-size:11.5px}
+  @media(prefers-reduced-motion:reduce){.check-row{animation:none;opacity:1;transform:none}.pill.running .dot{animation:none}}
+
+  /* ══ SECTION shell ══ */
+  section{padding:64px 0;border-top:1px solid var(--line)}
+  .sec-head{margin-bottom:32px}
+  .sec-head h2{font-family:var(--display);font-size:30px;font-weight:700;letter-spacing:-.01em;margin:0}
+
+  /* ══ SOBRE MÍ ══ */
+  .about-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:48px}
+  @media(max-width:780px){.about-grid{grid-template-columns:1fr}}
+  .about-tags{display:flex;flex-wrap:wrap;gap:8px;align-content:flex-start}
+  .tag{
+    font-family:var(--mono);font-size:12px;background:var(--paper-2);
+    border:1px solid var(--line);padding:6px 11px;border-radius:7px;color:var(--ink-2);
+  }
+  .about-copy p{color:var(--ink-2);margin:0 0 16px;font-size:15.5px}
+  .about-copy strong{color:var(--ink)}
+
+  /* ══ SERVICIOS ══ */
+  .svc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+  @media(max-width:780px){.svc-grid{grid-template-columns:1fr}}
+  .svc-card{
+    background:var(--white);border:1px solid var(--line);border-radius:var(--radius);
+    padding:22px;transition:border-color .2s,transform .2s;
+  }
+  .svc-card:hover{border-color:var(--pass);transform:translateY(-2px)}
+  .svc-tag{font-family:var(--mono);font-size:11.5px;color:var(--pass);margin-bottom:10px;display:block}
+  .svc-card h3{font-family:var(--display);font-size:18px;margin:0 0 8px;font-weight:700}
+  .svc-card p{color:var(--ink-2);font-size:14.5px;margin:0}
+
+  /* ══ CASO DE ESTUDIO (bug ticket) ══ */
+  .ticket{
+    background:var(--white);border:1px solid var(--line);border-radius:14px;
+    overflow:hidden;box-shadow:0 12px 32px rgba(21,33,30,.06);
+  }
+  .ticket-head{
+    padding:20px 26px;border-bottom:1px solid var(--line);
+    display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;
+  }
+  .ticket-head h3{font-family:var(--display);font-size:21px;margin:0 0 6px;font-weight:700}
+  .ticket-id{font-family:var(--mono);color:var(--ink-2);font-size:12.5px}
+  .ticket-body{padding:24px 26px}
+  .ticket-field{margin-bottom:22px}
+  .ticket-field:last-child{margin-bottom:0}
+  .ticket-label{
+    font-family:var(--mono);font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;
+    color:var(--ink-2);margin-bottom:8px;display:block;
+  }
+  .ticket-field p{margin:0 0 8px;color:var(--ink-2);font-size:14.5px}
+  .ticket-field ul{margin:0;padding-left:20px;color:var(--ink-2);font-size:14.5px}
+  .ticket-field li{margin-bottom:6px}
+  .stack{
+    font-family:var(--mono);font-size:12.5px;background:var(--alert-bg);color:var(--alert);
+    padding:12px 14px;border-radius:8px;overflow-x:auto;white-space:pre;
+  }
+  .diff{font-family:var(--mono);font-size:12.5px;border-radius:8px;overflow:hidden;border:1px solid var(--line)}
+  .diff-line{padding:8px 14px;white-space:pre-wrap;word-break:break-all}
+  .diff-rm{background:var(--alert-bg);color:#8a2b20}
+  .diff-add{background:var(--pass-bg);color:#146648}
+
+  /* ══ PORTAFOLIO ══ */
+  .track-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:780px){.track-grid{grid-template-columns:1fr}}
+  .track-card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:24px}
+  .track-card .stat{font-family:var(--display);font-size:32px;font-weight:700;color:var(--pass);margin-bottom:4px}
+  .track-card h4{font-family:var(--display);font-size:16px;margin:0 0 8px;font-weight:700}
+  .track-card p{color:var(--ink-2);font-size:14px;margin:0}
+
+  /* ══ ROADMAP (secuencia real → numerada a propósito) ══ */
+  .roadmap{position:relative;padding-left:0}
+  .rm-item{display:grid;grid-template-columns:64px 1fr;gap:20px;padding:20px 0;border-bottom:1px solid var(--line)}
+  .rm-item:last-child{border-bottom:none}
+  .rm-num{font-family:var(--mono);font-size:13px;color:var(--ink-2)}
+  .rm-item h4{font-family:var(--display);font-size:17px;margin:0 0 6px;font-weight:700;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  .rm-item p{color:var(--ink-2);font-size:14.5px;margin:0}
+
+  /* ══ CONTACTO (terminal) ══ */
+  .contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start}
+  @media(max-width:780px){.contact-wrap{grid-template-columns:1fr}}
+  .terminal{
+    background:var(--ink);border-radius:12px;padding:22px 24px;font-family:var(--mono);
+    font-size:13.5px;color:#D7E4E0;line-height:1.9;box-shadow:0 20px 48px rgba(21,33,30,.2);
+  }
+  .terminal .prompt{color:var(--pass)}
+  .terminal .flag{color:#9FB3AC}
+  .terminal a{color:#EAF2F0;text-decoration:underline;text-underline-offset:2px}
+  .contact-copy h2{margin-top:0}
+  .contact-copy p{color:var(--ink-2);font-size:15px;max-width:42ch}
+
+  footer{padding:32px 24px;text-align:center;font-family:var(--mono);font-size:12px;color:var(--ink-2);border-top:1px solid var(--line)}
+
+  /* ══ NAV mobile toggle ══ */
+  .nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:4px}
+  .nav-toggle span{display:block;width:22px;height:2px;background:var(--ink);margin:5px 0;transition:transform .2s,opacity .2s}
+  @media(max-width:720px){
+    .nav-toggle{display:block}
+    .nav-links{
+      position:fixed;top:64px;left:0;right:0;background:var(--paper);
+      flex-direction:column;gap:0;border-bottom:1px solid var(--line);
+      max-height:0;overflow:hidden;transition:max-height .25s ease;
+    }
+    .nav-links.open{max-height:280px}
+    .nav-links a{padding:16px 24px;border-top:1px solid var(--line)}
+  }
+
+  /* ══ PROCESO (secuencia real) ══ */
+  .process{display:grid;grid-template-columns:repeat(5,1fr);gap:0;position:relative}
+  @media(max-width:900px){.process{grid-template-columns:1fr 1fr;gap:24px}}
+  @media(max-width:520px){.process{grid-template-columns:1fr}}
+  .process-step{padding:0 14px 0 0;position:relative}
+  .process-step:not(:last-child)::after{
+    content:'';position:absolute;top:19px;right:0;width:14px;height:1.5px;background:var(--line);
+  }
+  @media(max-width:900px){.process-step:not(:last-child)::after{display:none}}
+  .process-num{
+    font-family:var(--mono);font-size:12px;color:var(--pass);
+    width:38px;height:38px;border:1.5px solid var(--pass);border-radius:50%;
+    display:flex;align-items:center;justify-content:center;margin-bottom:14px;background:var(--white);
+  }
+  .process-step h4{font-family:var(--display);font-size:15.5px;font-weight:700;margin:0 0 6px}
+  .process-step p{font-size:13px;color:var(--ink-2);margin:0}
+
+  /* ══ MÉTRICAS band ══ */
+  .metrics{background:var(--ink);border-radius:16px;padding:40px 32px}
+  .metrics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+  @media(max-width:780px){.metrics-grid{grid-template-columns:1fr 1fr}}
+  .metric{text-align:left}
+  .metric .num{font-family:var(--display);font-size:38px;font-weight:700;color:#EAF2F0;line-height:1}
+  .metric .lbl{font-family:var(--mono);font-size:12px;color:#8FA39C;margin-top:8px;display:block}
+
+  /* ══ STACK / herramientas ══ */
+  .stack-row{display:flex;flex-wrap:wrap;gap:10px}
+  .stack-chip{
+    display:flex;align-items:center;gap:8px;background:var(--white);border:1px solid var(--line);
+    border-radius:100px;padding:8px 16px;font-size:13.5px;font-weight:500;
+  }
+  .stack-chip .sw{width:8px;height:8px;border-radius:50%}
+
+  /* ══ Caso: expandir detalle + próximo caso ══ */
+  .ticket-toggle{
+    width:100%;text-align:left;background:var(--paper-2);border:1px solid var(--line);border-top:none;
+    padding:14px 26px;font-family:var(--mono);font-size:12.5px;color:var(--ink-2);cursor:pointer;
+    display:flex;justify-content:space-between;align-items:center;border-radius:0 0 14px 14px;
+  }
+  .ticket-toggle:hover{color:var(--ink)}
+  .ticket-detail{max-height:0;overflow:hidden;transition:max-height .35s ease}
+  .ticket-detail.open{max-height:900px}
+  .case-next{
+    margin-top:16px;border:1.5px dashed var(--line);border-radius:14px;padding:22px 26px;
+    display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;
+  }
+  .case-next h4{font-family:var(--display);font-size:16px;margin:0 0 4px;color:var(--ink-2);font-weight:700}
+  .case-next p{margin:0;font-size:13.5px;color:var(--ink-2)}
+
+  /* ══ typing effect ══ */
+  .type-cursor{display:inline-block;width:2px;background:var(--pass);margin-left:2px;animation:blink 1s step-end infinite}
+
+  /* ══ quick actions ══ */
+  .quick-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:18px}
+  .qa-link{
+    font-family:var(--mono);font-size:12.5px;color:var(--ink-2);text-decoration:none;
+    border-bottom:1px dashed var(--line);padding-bottom:2px;transition:color .15s,border-color .15s;
+  }
+  .qa-link:hover{color:var(--pass);border-color:var(--pass)}
+
+  /* ══ lang toggle ══ */
+  .lang-toggle{display:flex;border:1px solid var(--line);border-radius:100px;overflow:hidden;font-family:var(--mono);font-size:12px}
+  .lang-toggle button{border:none;background:transparent;padding:6px 12px;cursor:pointer;color:var(--ink-2)}
+  .lang-toggle button.active{background:var(--ink);color:var(--paper)}
+
+  /* ══ timeline ══ */
+  .timeline{display:flex;flex-direction:column;gap:0;margin-top:18px}
+  .tl-item{display:grid;grid-template-columns:100px 20px 1fr;gap:0;min-height:64px}
+  .tl-year{font-family:var(--mono);font-size:12.5px;color:var(--ink-2);padding-top:2px}
+  .tl-line{display:flex;flex-direction:column;align-items:center}
+  .tl-dot{width:10px;height:10px;border-radius:50%;background:var(--pass);margin-top:4px;flex-shrink:0}
+  .tl-bar{flex:1;width:1.5px;background:var(--line);margin-top:4px}
+  .tl-content{padding-bottom:22px}
+  .tl-content h4{font-family:var(--display);font-size:15.5px;margin:0 0 4px;font-weight:700}
+  .tl-content p{font-size:13.5px;color:var(--ink-2);margin:0}
+
+  /* ══ service demo interactions ══ */
+  .svc-demo-btn{
+    margin-top:14px;font-family:var(--mono);font-size:12px;font-weight:600;
+    background:var(--paper-2);border:1px solid var(--line);border-radius:7px;
+    padding:8px 12px;cursor:pointer;color:var(--ink);transition:border-color .15s;
+  }
+  .svc-demo-btn:hover{border-color:var(--pass)}
+  .svc-demo-out{max-height:0;overflow:hidden;transition:max-height .35s ease}
+  .svc-demo-out.open{max-height:420px;margin-top:14px}
+  .demo-terminal{
+    background:var(--ink);color:#D7E4E0;font-family:var(--mono);font-size:12px;
+    border-radius:8px;padding:14px;white-space:pre-wrap;line-height:1.7;
+  }
+  .demo-terminal .ok{color:var(--pass)}
+  .demo-label{font-family:var(--mono);font-size:10.5px;color:var(--ink-2);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;display:block}
+  .ai-form{display:flex;gap:8px;flex-wrap:wrap}
+  .ai-form input{
+    flex:1;min-width:160px;padding:9px 12px;border:1px solid var(--line);border-radius:7px;
+    font-family:var(--body);font-size:13.5px;
+  }
+  .ai-form button{
+    font-family:var(--mono);font-size:12px;font-weight:600;background:var(--ink);color:var(--paper);
+    border:none;border-radius:7px;padding:9px 16px;cursor:pointer;
+  }
+  .ai-out{font-size:13.5px;color:var(--ink-2);padding-left:18px;margin:0}
+  .ai-out li{margin-bottom:4px}
+
+  /* ══ cutover kanban (dentro de release mgmt) ══ */
+  .cutover-board{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+  @media(max-width:600px){.cutover-board{grid-template-columns:1fr 1fr}}
+  .cutover-col{background:var(--paper-2);border-radius:8px;padding:10px}
+  .cutover-col h5{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;color:var(--ink-2);margin:0 0 8px}
+  .cutover-card{background:var(--white);border:1px solid var(--line);border-radius:6px;padding:8px 10px;font-size:12px;margin-bottom:6px}
+
+  /* ══ roadmap kanban (público) ══ */
+  .rm-kanban{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  @media(max-width:780px){.rm-kanban{grid-template-columns:1fr}}
+  .rm-col{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:18px}
+  .rm-col-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+  .rm-col-head h4{font-family:var(--display);font-size:15px;margin:0;font-weight:700}
+  .rm-card{background:var(--paper-2);border-radius:8px;padding:10px 12px;font-size:13px;color:var(--ink-2);margin-bottom:8px}
+  .rm-card b{color:var(--ink);display:block;font-size:13.5px;margin-bottom:2px}
+
+  /* ══ contacto extra ══ */
+  .contact-extra{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+  .btn-whatsapp{background:#25D366;color:#fff}
+  .calendly-slot{
+    border:1.5px dashed var(--line);border-radius:12px;padding:22px;text-align:center;
+    font-family:var(--mono);font-size:12.5px;color:var(--ink-2);margin-top:20px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="brand">DragonflAI<span>QA</span></div>
+    <div class="nav-links" id="navLinks">
+      <a href="#sobre-mi" data-es="Sobre mí" data-en="About">Sobre mí</a>
+      <a href="#servicios" data-es="Servicios" data-en="Services">Servicios</a>
+      <a href="#caso" data-es="Caso de estudio" data-en="Case study">Caso de estudio</a>
+      <a href="#portafolio" data-es="Portafolio" data-en="Portfolio">Portafolio</a>
+      <a href="#roadmap" data-es="Roadmap" data-en="Roadmap">Roadmap</a>
+    </div>
+    <a class="nav-cta" href="#contacto">solicitar --validacion</a>
+    <div class="lang-toggle"><button id="langEs" class="active">ES</button><button id="langEn">EN</button></div>
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span><span></span></button>
+  </nav>
+</header>
+
+<!-- ══ HERO ══ -->
+<section class="hero" style="border-top:none">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">claudia@dragonflaiqa ~ portfolio</div>
+      <h1>QA Senior &amp; Release Manager <em>con IA</em></h1>
+      <p class="lede" style="font-family:var(--mono);font-size:15px;color:var(--pass);min-height:22px"><span id="typingSlogan"></span><span class="type-cursor">&nbsp;</span></p>
+      <p class="lede" data-es="13+ años asegurando calidad y coordinando releases de software bancario (Citi, HSBC, Banorte, AXA, UL Solutions). Hoy combino ese rigor con IA — Claude, Copilot, Applitools — para acelerar el testing sin sacrificar precisión." data-en="13+ years assuring quality and coordinating releases for banking software (Citi, HSBC, Banorte, AXA, UL Solutions). Today I pair that rigor with AI — Claude, Copilot, Applitools — to speed up testing without losing precision.">13+ años asegurando calidad y coordinando releases de software bancario (Citi, HSBC, Banorte, AXA, UL Solutions). Hoy combino ese rigor con IA — Claude, Copilot, Applitools — para acelerar el testing sin sacrificar precisión.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="#contacto" data-es="Solicita una validación express →" data-en="Request an express audit →">Solicita una validación express →</a>
+        <a class="btn btn-ghost" href="#caso" data-es="Ver caso de estudio" data-en="View case study">Ver caso de estudio</a>
+      </div>
+      <div class="quick-actions">
+        <a class="qa-link" href="#servicios" data-es="↳ Explora mis demos" data-en="↳ Explore my demos">↳ Explora mis demos</a>
+        <a class="qa-link" href="/CV-Claudia-Acosta-Hernandez.pdf" download data-es="↳ Descarga mi CV" data-en="↳ Download my CV">↳ Descarga mi CV</a>
+        <a class="qa-link" href="https://calendly.com/claudia-achd/30min" target="_blank" rel="noopener" data-es="↳ Agenda una reunión" data-en="↳ Book a meeting">↳ Agenda una reunión</a>
+      </div>
+    </div>
+    <div class="status-panel">
+      <div class="status-panel-head">
+        <span><b>release-checks</b> · rama: main</span>
+        <span class="pill running"><span class="dot"></span>running</span>
+      </div>
+      <div class="check-row">
+        <span class="check-icon ok">✓</span>
+        <span class="check-label">QA manual &amp; automatización<br><span class="check-sub">Selenium · Postman</span></span>
+      </div>
+      <div class="check-row">
+        <span class="check-icon ok">✓</span>
+        <span class="check-label">Release management<br><span class="check-sub">cutover · rollback · compliance</span></span>
+      </div>
+      <div class="check-row">
+        <span class="check-icon ok">✓</span>
+        <span class="check-label">Desarrollo de aplicaciones<br><span class="check-sub">producto propio en producción</span></span>
+      </div>
+      <div class="check-row">
+        <span class="check-icon run">●</span>
+        <span class="check-label">QA con AI<br><span class="check-sub">en construcción — roadmap abajo</span></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PROCESO ══ -->
+<section id="proceso" class="reveal">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">/como-trabajo</div>
+      <h2 data-es="Un proceso, no una corazonada" data-en="A process, not a hunch">Un proceso, no una corazonada</h2>
+    </div>
+    <div class="process">
+      <div class="process-step">
+        <div class="process-num">01</div>
+        <h4>Detectar</h4>
+        <p>Reproducción controlada del síntoma antes de asumir la causa.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-num">02</div>
+        <h4>Diagnosticar</h4>
+        <p>DevTools, logs y stack trace para acotar dónde vive el problema.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-num">03</div>
+        <h4>Corregir</h4>
+        <p>Fix a la causa raíz, siguiendo el patrón ya correcto del propio código.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-num">04</div>
+        <h4>Verificar</h4>
+        <p>Sintaxis y comportamiento revisados antes de entregar — no regresiones.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-num">05</div>
+        <h4>Documentar</h4>
+        <p>Reporte con el mismo formato que usaría en un entorno con control de cambios.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SOBRE MÍ ══ -->
+<section id="sobre-mi" class="reveal">
+  <div class="wrap about-grid">
+    <div>
+      <div class="eyebrow">/sobre-mi</div>
+      <h2 style="font-family:var(--display);font-size:26px;font-weight:700;margin:0 0 18px">13 años construyendo confianza en producción</h2>
+      <div class="about-tags">
+        <span class="tag">ISTQB Foundation</span>
+        <span class="tag">Scrum Master</span>
+        <span class="tag">ES (C2) / EN (C1)</span>
+      </div>
+      <div class="timeline">
+        <div class="tl-item">
+          <span class="tl-year">2013–14</span>
+          <div class="tl-line"><span class="tl-dot"></span><span class="tl-bar"></span></div>
+          <div class="tl-content"><h4>Banorte (IBM / Cinte)</h4><p>300+ servicios bancarios validados en AS/400.</p></div>
+        </div>
+        <div class="tl-item">
+          <span class="tl-year">2018–21</span>
+          <div class="tl-line"><span class="tl-dot"></span><span class="tl-bar"></span></div>
+          <div class="tl-content"><h4>Citi Bank (Globant)</h4><p>Banking mobile app — 4.6★ en su primer release.</p></div>
+        </div>
+        <div class="tl-item">
+          <span class="tl-year">2021–22</span>
+          <div class="tl-line"><span class="tl-dot"></span><span class="tl-bar"></span></div>
+          <div class="tl-content"><h4>HSBC (Globant)</h4><p>Release Manager — rating de 4.2 a 4.7★, 8+ regiones.</p></div>
+        </div>
+        <div class="tl-item">
+          <span class="tl-year">2022–25</span>
+          <div class="tl-line"><span class="tl-dot"></span><span class="tl-bar"></span></div>
+          <div class="tl-content"><h4>Citi Bank (Globant)</h4><p>Release Manager — 500+ casos de prueba con IA.</p></div>
+        </div>
+        <div class="tl-item">
+          <span class="tl-year">2025—hoy</span>
+          <div class="tl-line"><span class="tl-dot"></span></div>
+          <div class="tl-content"><h4>UL Solutions (TechBridge)</h4><p>Cutover Manager — QA aumentado con IA, -40% backlog.</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="about-copy">
+      <p><strong>Senior QA Engineer &amp; Release Manager</strong> con más de 13 años en plataformas financieras y empresariales — Citi, HSBC, Banorte, AXA, UL Solutions. He liderado más de <strong>25 releases en producción sin incidentes mayores</strong>, especializándome en testing manual y de APIs, orquestación de releases y estrategia de calidad.</p>
+      <p>Actualmente expando esa práctica hacia <strong>QA aumentado con IA</strong>: uso Claude AI, GitHub Copilot, Applitools Visual AI y Sentry AI para acelerar el diseño de casos de prueba, detectar anomalías visuales, estabilizar frameworks de automatización y analizar logs de backend — validando escenarios que la automatización tradicional no cubre.</p>
+      <p>A esa base formal le sumo un producto propio en producción (DragonflAI Events), donde diseño, desarrollo y pruebo software de principio a fin — el mismo rigor, aplicado también al lado de la construcción.</p>
+    </div>
+  </div>
+
+  <div class="wrap" style="margin-top:48px">
+    <div class="metrics reveal">
+      <div class="metrics-grid">
+        <div class="metric">
+          <div class="num">13+</div>
+          <span class="lbl">años en QA / release management</span>
+        </div>
+        <div class="metric">
+          <div class="num">25+</div>
+          <span class="lbl">releases en producción, sin incidentes mayores</span>
+        </div>
+        <div class="metric">
+          <div class="num">4.6–4.7★</div>
+          <span class="lbl">rating alcanzado en apps bancarias</span>
+        </div>
+        <div class="metric">
+          <div class="num">-40%</div>
+          <span class="lbl">backlog de bugs, en 6 semanas (UL Solutions)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap" style="margin-top:40px">
+    <div class="eyebrow">/stack</div>
+    <div class="stack-row reveal">
+      <span class="stack-chip"><span class="sw" style="background:var(--pass)"></span>Selenium</span>
+      <span class="stack-chip"><span class="sw" style="background:var(--pass)"></span>Postman</span>
+      <span class="stack-chip"><span class="sw" style="background:var(--running)"></span>Azure DevOps</span>
+      <span class="stack-chip"><span class="sw" style="background:var(--running)"></span>Jira</span>
+      <span class="stack-chip"><span class="sw" style="background:var(--running)"></span>SQL Server</span>
+      <span class="stack-chip"><span class="sw" style="background:var(--violet)"></span>Python</span>
+      <span class="stack-chip"><span class="sw" style="background:var(--violet)"></span>Claude AI</span>
+      <span class="stack-chip"><span class="sw" style="background:var(--violet)"></span>GitHub Copilot</span>
+      <span class="stack-chip"><span class="sw" style="background:var(--violet)"></span>Applitools</span>
+      <span class="stack-chip"><span class="sw" style="background:var(--violet)"></span>Sentry AI</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SERVICIOS ══ -->
+<section id="servicios" class="reveal">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">/servicios</div>
+      <h2 data-es="Lo que puedo hacer por tu equipo" data-en="What I can do for your team">Lo que puedo hacer por tu equipo</h2>
+    </div>
+    <div class="svc-grid">
+      <div class="svc-card">
+        <span class="svc-tag">[manual-qa]</span>
+        <h3>QA manual</h3>
+        <p>Diseño y ejecución de planes de prueba, casos límite, testing exploratorio.</p>
+        <button class="svc-demo-btn" data-toggle="demo-manual">Ver bug report real ↓</button>
+        <div class="svc-demo-out" id="demo-manual">
+          <span class="demo-label">demo — extracto real</span>
+          <div class="demo-terminal">Síntoma: botón "Generar mi plan" no responde
+<span class="ok">✓</span> Reproducido en producción
+<span class="ok">✓</span> Causa raíz: indexado por idioma, no por tipo de evento
+<span class="ok">✓</span> Fix verificado, sin regresión
+<a href="#caso" style="color:#EAF2F0">→ ver caso completo</a></div>
+        </div>
+      </div>
+      <div class="svc-card">
+        <span class="svc-tag">[automatizacion]</span>
+        <h3>Automatización</h3>
+        <p>Automatización básica de pruebas con Selenium y Postman.</p>
+        <button class="svc-demo-btn" data-toggle="demo-auto">Ejecutar demo ▶</button>
+        <div class="svc-demo-out" id="demo-auto">
+          <span class="demo-label">demo — log simulado</span>
+          <div class="demo-terminal">$ pytest test_login.py -v
+test_login_valid_credentials <span class="ok">PASSED</span>
+test_login_invalid_password <span class="ok">PASSED</span>
+test_login_empty_fields <span class="ok">PASSED</span>
+3 passed in 1.84s</div>
+        </div>
+      </div>
+      <div class="svc-card">
+        <span class="svc-tag">[release-mgmt]</span>
+        <h3>Release management</h3>
+        <p>Planificación de cutover, checklists de pre-lanzamiento y estrategias de rollback.</p>
+        <button class="svc-demo-btn" data-toggle="demo-cutover">Ver tablero de cutover ↓</button>
+        <div class="svc-demo-out" id="demo-cutover">
+          <div class="cutover-board">
+            <div class="cutover-col"><h5>Pre-cutover</h5><div class="cutover-card">Backup DB</div><div class="cutover-card">Freeze de código</div></div>
+            <div class="cutover-col"><h5>En progreso</h5><div class="cutover-card">Migración</div></div>
+            <div class="cutover-col"><h5>Verificación</h5><div class="cutover-card">Smoke tests</div></div>
+            <div class="cutover-col"><h5>Completado</h5><div class="cutover-card">Go-live ✓</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="svc-card">
+        <span class="svc-tag">[dev]</span>
+        <h3>Desarrollo de aplicaciones</h3>
+        <p>Construcción de productos completos — apps de eventos, dashboards — no solo pruebas sobre código ajeno.</p>
+      </div>
+      <div class="svc-card">
+        <span class="svc-tag">[qa-ai]</span>
+        <h3>QA aumentado con IA</h3>
+        <p>En mi práctica diaria uso Claude AI, GitHub Copilot, Applitools Visual AI y Sentry AI para diseño de casos, detección visual y análisis de logs. Abajo, un generador simple de ejemplo:</p>
+        <div class="ai-form">
+          <input type="text" id="aiFeatureInput" placeholder="ej. login, checkout, búsqueda…">
+          <button id="aiGenBtn">Generar</button>
+        </div>
+        <div class="svc-demo-out" id="demo-ai">
+          <span class="demo-label" style="margin-top:10px">generador de plantilla — no conectado a IA real todavía</span>
+          <ul class="ai-out" id="aiOutList"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CASO DE ESTUDIO ══ -->
+<section id="caso" class="reveal">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">/caso-de-estudio</div>
+      <h2 data-es="Un defecto real, de principio a fin" data-en="One real bug, start to finish">Un defecto real, de principio a fin</h2>
+    </div>
+    <div class="ticket">
+      <div class="ticket-head">
+        <div>
+          <h3>El botón de conversión dejó de responder</h3>
+          <span class="ticket-id">dragonflaievents.com · producto propio en producción</span>
+        </div>
+        <span class="pill pass"><span class="dot"></span>resuelto</span>
+      </div>
+      <div class="ticket-body">
+        <div class="ticket-field">
+          <span class="ticket-label">Síntoma reportado</span>
+          <p>El botón principal de conversión — "Generar mi plan personalizado" — dejaba de responder sin mostrar ningún error visible al usuario. El peor tipo de falla desde QA: silenciosa.</p>
+        </div>
+      </div>
+      <button class="ticket-toggle" id="ticketToggle" aria-expanded="false">ver diagnóstico técnico completo <span id="ticketToggleIcon">＋</span></button>
+      <div class="ticket-detail" id="ticketDetail">
+        <div class="ticket-body" style="padding-top:22px">
+        <div class="ticket-field">
+          <span class="ticket-label">Diagnóstico</span>
+          <ul>
+            <li>Reproducción controlada en producción con DevTools (consola + Network), para descartar backend primero.</li>
+            <li>Confirmé que no se disparaba ninguna llamada a la API antes de la falla — acotó el problema a lógica del cliente.</li>
+            <li>Stack trace exacto capturado: <code>TypeError: Cannot read properties of undefined (reading '0')</code>.</li>
+          </ul>
+        </div>
+        <div class="ticket-field">
+          <span class="ticket-label">Stack trace</span>
+          <div class="stack">TypeError: Cannot read properties of undefined (reading '0')
+    at generate (app:4234:97)
+    at HTMLButtonElement.onclick (app:1082:65)</div>
+        </div>
+        <div class="ticket-field">
+          <span class="ticket-label">Causa raíz</span>
+          <p>Un objeto de datos indexado primero por tipo de evento y luego por idioma se leía en una línea como si estuviera indexado directamente por idioma — inconsistente con el patrón correcto ya usado en otra parte del propio código.</p>
+        </div>
+        <div class="ticket-field">
+          <span class="ticket-label">Fix aplicado</span>
+          <div class="diff">
+            <div class="diff-line diff-rm">- T.priority[lang][0]</div>
+            <div class="diff-line diff-add">+ (T.priority[eventType] || T.priority['Boda/Wedding'])[lang][0]</div>
+          </div>
+        </div>
+        <div class="ticket-field">
+          <span class="ticket-label">Verificación</span>
+          <p>Sintaxis del archivo completo verificada antes de entregar, para no introducir una regresión nueva al corregir la original. Documentado con el mismo formato que usaría en un entorno corporativo con control de cambios: síntoma → reproducción → causa raíz → fix → verificación.</p>
+        </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="case-next reveal">
+      <div>
+        <h4>Próximo caso <span class="pill" style="background:var(--paper-2);color:var(--ink-2)"><span class="dot" style="background:var(--ink-2)"></span>en cola</span></h4>
+        <p>Cada nuevo defecto documentado de principio a fin se agrega aquí — este espacio crece con el producto.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PORTAFOLIO ══ -->
+<section id="portafolio" class="reveal">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">/portafolio</div>
+      <h2 data-es="Trabajo shippeado" data-en="Work shipped">Trabajo shippeado</h2>
+    </div>
+    <div class="track-grid">
+      <div class="track-card">
+        <div class="stat">25+</div>
+        <h4>Releases — Citi, HSBC, UL Solutions</h4>
+        <p>Producción sin incidentes mayores, en plataformas financieras de escala global (8+ regiones en HSBC).</p>
+      </div>
+      <div class="track-card">
+        <div class="stat">300+</div>
+        <h4>Servicios bancarios validados — Banorte</h4>
+        <p>Transacciones ATM en AS/400, cero defectos post-release.</p>
+      </div>
+      <div class="track-card">
+        <div class="stat">500+</div>
+        <h4>Casos de prueba — Citi Account Opening</h4>
+        <p>Diseñados y potenciados con casos límite generados por IA.</p>
+      </div>
+      <div class="track-card">
+        <div class="stat">100%</div>
+        <h4>dragonflaievents.com</h4>
+        <p>Producto propio en producción — desarrollado, probado y mantenido de principio a fin.</p>
+        <a class="qa-link" href="https://github.com/claulizah/dragonflai-events" target="_blank" rel="noopener" style="display:inline-block;margin-top:10px">↳ Ver código en GitHub</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ROADMAP (secuencia real) ══ -->
+<section id="roadmap" class="reveal">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">/roadmap</div>
+      <h2 data-es="Hacia dónde va esto" data-en="Where this is headed">Hacia dónde va esto</h2>
+    </div>
+    <div class="rm-kanban">
+      <div class="rm-col">
+        <div class="rm-col-head"><h4>Ahora</h4><span class="pill pass"><span class="dot"></span>en vivo</span></div>
+        <div class="rm-card"><b>Portafolio personal</b>Este sitio, con casos de éxito documentados.</div>
+        <div class="rm-card"><b>Demos simuladas</b>Bug report, terminal de automatización, tablero de cutover.</div>
+      </div>
+      <div class="rm-col">
+        <div class="rm-col-head"><h4>Próximo</h4><span class="pill running"><span class="dot"></span>en curso</span></div>
+        <div class="rm-card"><b>Scripts reales en GitHub</b>Repo <a href="https://github.com/claulizah/dragonflai-QA" target="_blank" rel="noopener" style="color:inherit">dragonflai-QA</a> ya creado — Login Validator y API Health Check en construcción, aún no ejecutables en vivo.</div>
+        <div class="rm-card"><b>Dashboard QA con AI</b>Demo embebida, sin backend propio todavía.</div>
+        <div class="rm-card"><b>Calendly + WhatsApp</b>Agendar y contactar directo desde el sitio.</div>
+      </div>
+      <div class="rm-col">
+        <div class="rm-col-head"><h4>Backlog</h4><span class="pill" style="background:var(--violet-bg);color:var(--violet)"><span class="dot" style="background:var(--violet)"></span>futuro</span></div>
+        <div class="rm-card"><b>Ejecutar scripts en vivo</b>Requiere backend propio (sandbox seguro).</div>
+        <div class="rm-card"><b>Área de clientes</b>Login + reportes personalizados.</div>
+        <div class="rm-card"><b>Planes y pagos</b>Freemium / Pro / Enterprise, Stripe.</div>
+        <div class="rm-card"><b>Blog técnico</b>Artículos sobre QA, AI y releases.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONTACTO ══ -->
+<section id="contacto" class="reveal">
+  <div class="wrap contact-wrap">
+    <div class="contact-copy">
+      <div class="eyebrow">/contacto</div>
+      <h2 style="font-family:var(--display);font-size:26px;font-weight:700">¿Tienes un release próximo?</h2>
+      <p>Escríbeme para una validación express de 2–3 horas sobre tu proceso de QA o release — sin compromiso más allá de eso.</p>
+      <div class="contact-extra">
+        <a class="btn btn-whatsapp" href="https://wa.me/525582330752" target="_blank" rel="noopener">💬 WhatsApp</a>
+        <a class="btn btn-ghost" href="mailto:clauliz.acosta@gmail.com">✉️ Escribir correo</a>
+      </div>
+      <div style="margin-top:20px;border:1px solid var(--line);border-radius:12px;overflow:hidden">
+        <iframe src="https://calendly.com/claudia-achd/30min" width="100%" height="580" frameborder="0" title="Agenda una reunión con Claudia Acosta"></iframe>
+      </div>
+    </div>
+    <div class="terminal">
+      <div><span class="prompt">claudia@dragonflaiqa</span>:~$ contact <span class="flag">--email</span> <a href="mailto:clauliz.acosta@gmail.com">clauliz.acosta@gmail.com</a></div>
+      <div><span class="prompt">claudia@dragonflaiqa</span>:~$ contact <span class="flag">--phone</span> <a href="tel:+525582330752">+52 55 8233 0752</a></div>
+      <div><span class="prompt">claudia@dragonflaiqa</span>:~$ contact <span class="flag">--linkedin</span> <a href="https://linkedin.com/in/claudia-lizeth-acosta-hernandez-8287b355" target="_blank" rel="noopener">linkedin.com/in/claudia-lizeth-acosta-hernandez</a></div>
+      <div><span class="prompt">claudia@dragonflaiqa</span>:~$ contact <span class="flag">--upwork</span> <a href="#" target="_blank" rel="noopener">upwork.com/freelancers/tu-perfil</a></div>
+      <div><span class="prompt">claudia@dragonflaiqa</span>:~$ contact <span class="flag">--github</span> <a href="https://github.com/claulizah" target="_blank" rel="noopener">github.com/claulizah</a></div>
+    </div>
+  </div>
+</section>
+
+<footer>DragonflAI QA · dragonflaiqa.com · construido por Claudia Acosta</footer>
+
+<script>
+  // Menú móvil
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => {
+    const open = navLinks.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', open);
+  });
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    navToggle.setAttribute('aria-expanded', 'false');
+  }));
+
+  // Expandir/colapsar diagnóstico técnico del caso de estudio
+  const ticketToggle = document.getElementById('ticketToggle');
+  const ticketDetail = document.getElementById('ticketDetail');
+  const ticketToggleIcon = document.getElementById('ticketToggleIcon');
+  ticketToggle.addEventListener('click', () => {
+    const open = ticketDetail.classList.toggle('open');
+    ticketToggle.setAttribute('aria-expanded', open);
+    ticketToggleIcon.textContent = open ? '－' : '＋';
+    ticketToggle.firstChild.textContent = open ? 'ocultar diagnóstico técnico ' : 'ver diagnóstico técnico completo ';
+  });
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.15 });
+    revealEls.forEach(el => io.observe(el));
+  } else {
+    revealEls.forEach(el => el.classList.add('in'));
+  }
+
+  // Typing effect del slogan del hero
+  const sloganEs = '13+ años · 25+ releases sin incidentes · QA aumentado con IA';
+  const sloganEl = document.getElementById('typingSlogan');
+  let typeI = 0;
+  function typeStep(){
+    if (typeI <= sloganEs.length) {
+      sloganEl.textContent = sloganEs.slice(0, typeI);
+      typeI++;
+      setTimeout(typeStep, 45);
+    }
+  }
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    sloganEl.textContent = sloganEs;
+  } else {
+    typeStep();
+  }
+
+  // Toggles genéricos de demos de servicio (bug report, terminal, cutover)
+  document.querySelectorAll('.svc-demo-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = document.getElementById(btn.dataset.toggle);
+      target.classList.toggle('open');
+    });
+  });
+
+  // Generador de casos de prueba — PLANTILLA, no IA real (dejado explícito en el copy)
+  const AI_TEMPLATES = (feature) => [
+    `Verificar que "${feature}" funciona con datos válidos`,
+    `Verificar el comportamiento de "${feature}" con campos vacíos`,
+    `Verificar "${feature}" con datos en el límite (0, negativos, máximo permitido)`,
+    `Verificar mensajes de error claros si "${feature}" falla`,
+    `Verificar "${feature}" en móvil y escritorio`
+  ];
+  document.getElementById('aiGenBtn').addEventListener('click', () => {
+    const input = document.getElementById('aiFeatureInput');
+    const feature = input.value.trim() || 'la funcionalidad';
+    const list = document.getElementById('aiOutList');
+    list.innerHTML = AI_TEMPLATES(feature).map(t => `<li>${t}</li>`).join('');
+    document.getElementById('demo-ai').classList.add('open');
+  });
+
+  // Selector ES/EN — cubre navegación, hero y encabezados de sección
+  const langEsBtn = document.getElementById('langEs');
+  const langEnBtn = document.getElementById('langEn');
+  function setLang(l){
+    document.documentElement.lang = l;
+    document.querySelectorAll('[data-' + l + ']').forEach(el => {
+      el.textContent = el.getAttribute('data-' + l);
+    });
+    langEsBtn.classList.toggle('active', l === 'es');
+    langEnBtn.classList.toggle('active', l === 'en');
+  }
+  langEsBtn.addEventListener('click', () => setLang('es'));
+  langEnBtn.addEventListener('click', () => setLang('en'));
+</script>
+
+</body>
+</html>
