@@ -208,6 +208,23 @@
   .track-card h4{font-family:var(--display);font-size:16px;margin:0 0 8px;font-weight:700}
   .track-card p{color:var(--ink-2);font-size:14px;margin:0}
 
+  .sample-report{
+    margin-top:20px;background:var(--ink);border-radius:var(--radius);
+    padding:26px 28px;display:flex;align-items:center;gap:24px;flex-wrap:wrap;
+  }
+  .sample-report-text{flex:1;min-width:240px}
+  .sample-report-text h4{font-family:var(--display);font-size:18px;font-weight:700;color:var(--white);margin:0 0 8px}
+  .sample-report-text p{color:#B9C4B4;font-size:14.5px;margin:0;max-width:56ch}
+  .sample-report-btn{
+    flex:none;display:flex;flex-direction:column;gap:2px;text-decoration:none;
+    background:var(--pass);color:var(--white);padding:14px 22px;border-radius:8px;
+    font-family:var(--mono);text-align:center;transition:background .18s ease;
+  }
+  .sample-report-btn:hover{background:#188a63}
+  .sample-report-btn span{font-weight:600;font-size:14px}
+  .sample-report-btn small{font-size:11px;opacity:.8}
+  @media(max-width:780px){.sample-report{flex-direction:column;align-items:stretch}.sample-report-btn{text-align:center}}
+
   /* ══ ROADMAP (secuencia real → numerada a propósito) ══ */
   .roadmap{position:relative;padding-left:0}
   .rm-item{display:grid;grid-template-columns:64px 1fr;gap:20px;padding:20px 0;border-bottom:1px solid var(--line)}
@@ -725,6 +742,18 @@ test_login_empty_fields <span class="ok">PASSED</span>
         <a class="qa-link" href="https://github.com/claulizah/dragonflai-events" target="_blank" rel="noopener" style="display:inline-block;margin-top:10px">↳ Ver código en GitHub</a>
       </div>
     </div>
+
+    <div class="sample-report">
+      <div class="sample-report-text">
+        <div class="eyebrow" style="margin-bottom:8px">QA Audit Express</div>
+        <h4 data-es="Descarga una auditoría real completa" data-en="Download a full real audit">Descarga una auditoría real completa</h4>
+        <p data-es="23 hallazgos con severidad, evidencia, causa probable y recomendación. Auditoría de mi propio producto, con el mismo formato que entrego a un cliente." data-en="23 findings with severity, evidence, probable root cause and recommendation. My own product, audited in the exact format I deliver to clients.">23 hallazgos con severidad, evidencia, causa probable y recomendación. Auditoría de mi propio producto, con el mismo formato que entrego a un cliente.</p>
+      </div>
+      <a class="sample-report-btn" href="/QA-Audit-Sample-Report.pdf" download>
+        <span data-es="↓ Descargar reporte" data-en="↓ Download report">↓ Descargar reporte</span>
+        <small>PDF · 8&nbsp;pág.</small>
+      </a>
+    </div>
   </div>
 </section>
 
@@ -777,7 +806,7 @@ test_login_empty_fields <span class="ok">PASSED</span>
       <div><span class="prompt">claudia@dragonflaiqa</span>:~$ contact <span class="flag">--email</span> <a href="mailto:clauliz.acosta@gmail.com">clauliz.acosta@gmail.com</a></div>
       <div><span class="prompt">claudia@dragonflaiqa</span>:~$ contact <span class="flag">--phone</span> <a href="tel:+525582330752">+52 55 8233 0752</a></div>
       <div><span class="prompt">claudia@dragonflaiqa</span>:~$ contact <span class="flag">--linkedin</span> <a href="https://linkedin.com/in/claudia-lizeth-acosta-hernandez-8287b355" target="_blank" rel="noopener">linkedin.com/in/claudia-lizeth-acosta-hernandez</a></div>
-      <div><span class="prompt">claudia@dragonflaiqa</span>:~$ contact <span class="flag">--upwork</span> <a href="#" target="_blank" rel="noopener">upwork.com/freelancers/tu-perfil</a></div>
+      <div><span class="prompt">claudia@dragonflaiqa</span>:~$ contact <span class="flag">--upwork</span> <a href="https://www.upwork.com/freelancers/~014fec63e580cb9f48" target="_blank" rel="noopener">upwork.com/freelancers/~014fec63e580cb9f48</a></div>
       <div><span class="prompt">claudia@dragonflaiqa</span>:~$ contact <span class="flag">--github</span> <a href="https://github.com/claulizah" target="_blank" rel="noopener">github.com/claulizah</a></div>
     </div>
   </div>
