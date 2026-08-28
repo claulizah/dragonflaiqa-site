@@ -41,11 +41,19 @@
     gap:16px;padding-top:14px;padding-bottom:14px;
   }
   .mark{font-family:var(--mono);font-size:13px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;}
+  .topbar-right{display:flex;align-items:center;gap:14px;}
   .avail{
     font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;
     color:var(--muted);display:flex;align-items:center;gap:8px;
   }
   .dot{width:8px;height:8px;border-radius:50%;background:var(--go);flex:none;}
+  .lang-btn{
+    font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+    background:transparent;border:1px solid var(--ink);color:var(--ink);
+    padding:5px 11px;border-radius:999px;cursor:pointer;
+    transition:background .15s ease,color .15s ease,border-color .15s ease;
+  }
+  .lang-btn:hover{background:var(--ink);color:#fff;}
 
   /* ---------- hero ---------- */
   .hero{background:var(--ink);color:#fff;padding:88px 0 0;}
@@ -270,23 +278,26 @@
 <div class="topbar">
   <div class="wrap">
     <div class="mark">Claudia Acosta</div>
-    <div class="avail"><span class="dot"></span> Available — remote worldwide</div>
+    <div class="topbar-right">
+      <div class="avail" data-es='<span class="dot"></span> Disponible — remoto, cualquier país'><span class="dot"></span> Available — remote worldwide</div>
+      <button id="langToggle" class="lang-btn" type="button" aria-label="Switch language">ES</button>
+    </div>
   </div>
 </div>
 
 <header class="hero">
   <div class="wrap">
-    <p class="eyebrow">QA Engineering · Release Management · Banking &amp; Fintech</p>
-    <h1>Someone has to decide whether it ships. In banking, that's been <em>me</em> for 13 years.</h1>
-    <p class="lede">I plan and run the releases that can't fail — core banking, payments, account opening — and I build the QA process that gets them there. <strong>Citi. HSBC. Banorte. AXA. UL Solutions.</strong></p>
-    <p class="lede">Now taking freelance and contract work, and open to remote roles.</p>
+    <p class="eyebrow" data-es="Ingeniería de QA · Gestión de Releases · Banca y Fintech">QA Engineering · Release Management · Banking &amp; Fintech</p>
+    <h1 data-es="Alguien tiene que decidir si algo sale a producción. En banca, esa persona he sido <em>yo</em> durante 13 años.">Someone has to decide whether it ships. In banking, that's been <em>me</em> for 13 years.</h1>
+    <p class="lede" data-es="Planeo y ejecuto los releases que no pueden fallar — banca core, pagos, apertura de cuentas — y construyo el proceso de QA que los lleva ahí. <strong>Citi. HSBC. Banorte. AXA. UL Solutions.</strong>">I plan and run the releases that can't fail — core banking, payments, account opening — and I build the QA process that gets them there. <strong>Citi. HSBC. Banorte. AXA. UL Solutions.</strong></p>
+    <p class="lede" data-es="Actualmente disponible para freelance, proyectos por contrato, y abierta a roles remotos.">Now taking freelance and contract work, and open to remote roles.</p>
 
     <div class="board">
-      <div class="board-head"><span>Career release record</span><span>2010 — present</span></div>
-      <div class="row"><span class="label">Production releases led</span><span class="val">25+</span><span class="ok">PASS</span></div>
-      <div class="row"><span class="label">Major rollbacks</span><span class="val">0</span><span class="ok">PASS</span></div>
-      <div class="row"><span class="label">Countries deployed to</span><span class="val">8+</span><span class="ok">PASS</span></div>
-      <div class="row"><span class="label">SOX / PCI audit findings</span><span class="val">0 critical</span><span class="ok">PASS</span></div>
+      <div class="board-head"><span data-es="Historial de releases">Career release record</span><span data-es="2010 — presente">2010 — present</span></div>
+      <div class="row"><span class="label" data-es="Releases liderados en producción">Production releases led</span><span class="val">25+</span><span class="ok">PASS</span></div>
+      <div class="row"><span class="label" data-es="Rollbacks mayores">Major rollbacks</span><span class="val">0</span><span class="ok">PASS</span></div>
+      <div class="row"><span class="label" data-es="Países con despliegue">Countries deployed to</span><span class="val">8+</span><span class="ok">PASS</span></div>
+      <div class="row"><span class="label" data-es="Hallazgos de auditoría SOX/PCI">SOX / PCI audit findings</span><span class="val">0 critical</span><span class="ok">PASS</span></div>
     </div>
   </div>
 </header>
@@ -295,63 +306,63 @@
   <div class="wrap">
     <div class="band">
       <span class="num">01</span>
-      <h2>The record</h2>
-      <span class="note">Selected work</span>
+      <h2 data-es="Trayectoria">The record</h2>
+      <span class="note" data-es="Trabajo seleccionado">Selected work</span>
     </div>
 
     <div class="record">
       <article class="case">
         <div class="case-top">
           <h3>UL Solutions</h3>
-          <span class="role">Senior QA Engineer / Cutover Manager</span>
+          <span class="role" data-es="Ingeniera QA Senior / Cutover Manager">Senior QA Engineer / Cutover Manager</span>
           <span class="when">2025</span>
         </div>
-        <p>Multisite enterprise deployment of a consumer product testing portal. I introduced AI-assisted test design and defect clustering, then rebuilt triage around it — and mapped risk and dependencies across the cross-functional teams feeding the release.</p>
+        <p data-es="Despliegue empresarial multisitio de un portal de pruebas para producto de consumo. Introduje diseño de pruebas asistido por IA y agrupación de defectos, y rediseñé el triage alrededor de eso — además de mapear riesgos y dependencias entre los equipos multifuncionales que alimentaban el release.">Multisite enterprise deployment of a consumer product testing portal. I introduced AI-assisted test design and defect clustering, then rebuilt triage around it — and mapped risk and dependencies across the cross-functional teams feeding the release.</p>
         <ul class="hits">
-          <li>Bug backlog <b>−40%</b> in six weeks</li>
-          <li>SOX / PCI audit, <b>zero</b> critical findings</li>
-          <li>Visual AI regression across sites</li>
+          <li data-es="Backlog de bugs <b>−40%</b> en seis semanas">Bug backlog <b>−40%</b> in six weeks</li>
+          <li data-es="Auditoría SOX/PCI, <b>cero</b> hallazgos críticos">SOX / PCI audit, <b>zero</b> critical findings</li>
+          <li data-es="Regresión visual con IA en todos los sitios">Visual AI regression across sites</li>
         </ul>
       </article>
 
       <article class="case">
         <div class="case-top">
           <h3>HSBC</h3>
-          <span class="role">Release Manager &amp; Senior QA Lead — via Globant</span>
+          <span class="role" data-es="Release Manager y QA Lead Senior — vía Globant">Release Manager &amp; Senior QA Lead — via Globant</span>
           <span class="when">2021—2022</span>
         </div>
-        <p>Global banking application live in eight-plus countries. I owned release planning, cutover execution, hotfix deployment and rollback procedure for a platform where a bad night is a headline.</p>
+        <p data-es="Aplicación bancaria global en producción en más de ocho países. Fui responsable de la planeación de releases, ejecución de cutover, despliegue de hotfixes y procedimientos de rollback en una plataforma donde una mala noche se vuelve noticia.">Global banking application live in eight-plus countries. I owned release planning, cutover execution, hotfix deployment and rollback procedure for a platform where a bad night is a headline.</p>
         <ul class="hits">
-          <li><b>10+</b> releases, zero major incidents</li>
-          <li>App store rating <b>4.2 → 4.7</b></li>
-          <li>Senior QA → Lead → Release Manager in <b>13 months</b></li>
+          <li data-es="<b>10+</b> releases, cero incidentes mayores"><b>10+</b> releases, zero major incidents</li>
+          <li data-es="Calificación en la tienda de apps <b>4.2 → 4.7</b>">App store rating <b>4.2 → 4.7</b></li>
+          <li data-es="QA Senior → Lead → Release Manager en <b>13 meses</b>">Senior QA → Lead → Release Manager in <b>13 months</b></li>
         </ul>
       </article>
 
       <article class="case">
         <div class="case-top">
           <h3>Citi</h3>
-          <span class="role">Release Manager &amp; Senior QA Engineer — via Globant</span>
+          <span class="role" data-es="Release Manager e Ingeniera QA Senior — vía Globant">Release Manager &amp; Senior QA Engineer — via Globant</span>
           <span class="when">2018—2025</span>
         </div>
-        <p>Consumer banking mobile app, then the account opening platform and its automated validation and approval workflows. Seven years on the same client, moving from manual tester to running the release.</p>
+        <p data-es="App móvil de banca para consumidores y, después, la plataforma de apertura de cuentas con sus flujos automatizados de validación y aprobación. Siete años con el mismo cliente, pasando de tester manual a liderar el release.">Consumer banking mobile app, then the account opening platform and its automated validation and approval workflows. Seven years on the same client, moving from manual tester to running the release.</p>
         <ul class="hits">
-          <li><b>500+</b> test cases, AI-generated edge cases</li>
-          <li>New app version launched at <b>4.6</b></li>
-          <li><b>15+</b> device configurations under test</li>
+          <li data-es="<b>500+</b> casos de prueba, casos límite generados con IA"><b>500+</b> test cases, AI-generated edge cases</li>
+          <li data-es="Nueva versión de la app lanzada con calificación <b>4.6</b>">New app version launched at <b>4.6</b></li>
+          <li data-es="<b>15+</b> configuraciones de dispositivo probadas"><b>15+</b> device configurations under test</li>
         </ul>
       </article>
 
       <article class="case">
         <div class="case-top">
           <h3>Banorte</h3>
-          <span class="role">Senior QA Tester — via Cinte / IBM</span>
+          <span class="role" data-es="QA Tester Senior — vía Cinte / IBM">Senior QA Tester — via Cinte / IBM</span>
           <span class="when">2013—2014</span>
         </div>
-        <p>Core banking on AS/400 (IBM i). ATM transaction flows, service integration and 5250 interfaces — the layer most testers never touch and every bank still runs on.</p>
+        <p data-es="Banca core sobre AS/400 (IBM i). Flujos de transacciones de cajero automático, integración de servicios e interfaces 5250 — la capa que la mayoría de los testers nunca toca y sobre la que todavía corre cada banco.">Core banking on AS/400 (IBM i). ATM transaction flows, service integration and 5250 interfaces — the layer most testers never touch and every bank still runs on.</p>
         <ul class="hits">
-          <li><b>300+</b> banking services validated</li>
-          <li><b>Zero</b> post-release defects</li>
+          <li data-es="<b>300+</b> servicios bancarios validados"><b>300+</b> banking services validated</li>
+          <li data-es="<b>Cero</b> defectos post-release"><b>Zero</b> post-release defects</li>
           <li>SQL · SOAP UI · RPG / COBOL</li>
         </ul>
       </article>
@@ -363,92 +374,92 @@
   <div class="wrap">
     <div class="band">
       <span class="num">02</span>
-      <h2>How I can help</h2>
-      <span class="note">Freelance &amp; contract</span>
+      <h2 data-es="Cómo puedo ayudarte">How I can help</h2>
+      <span class="note" data-es="Freelance y por contrato">Freelance &amp; contract</span>
     </div>
 
     <div class="svc">
       <article>
-        <span class="tag">Fractional</span>
-        <h3>Release &amp; cutover management</h3>
-        <p>Release planning, go/no-go criteria, cutover runbooks, rollback plans and deployment coordination — part-time, for teams that ship big and have nobody who has done it before.</p>
+        <span class="tag" data-es="Fraccional">Fractional</span>
+        <h3 data-es="Gestión de releases y cutover">Release &amp; cutover management</h3>
+        <p data-es="Planeación de releases, criterios go/no-go, runbooks de cutover, planes de rollback y coordinación de despliegue — de tiempo parcial, para equipos que lanzan en grande y no tienen a nadie que ya lo haya hecho antes.">Release planning, go/no-go criteria, cutover runbooks, rollback plans and deployment coordination — part-time, for teams that ship big and have nobody who has done it before.</p>
       </article>
       <article>
-        <span class="tag">Two to four weeks</span>
-        <h3>QA audit &amp; strategy</h3>
-        <p>Where quality is actually breaking down, what to test and what to stop testing, and a 90-day plan your team can run without me.</p>
+        <span class="tag" data-es="De dos a cuatro semanas">Two to four weeks</span>
+        <h3 data-es="Auditoría y estrategia de QA">QA audit &amp; strategy</h3>
+        <p data-es="Dónde se está rompiendo realmente la calidad, qué probar y qué dejar de probar, y un plan de 90 días que tu equipo pueda ejecutar sin mí.">Where quality is actually breaking down, what to test and what to stop testing, and a 90-day plan your team can run without me.</p>
       </article>
       <article>
-        <span class="tag">Setup &amp; enablement</span>
-        <h3>AI-augmented QA</h3>
-        <p>Putting AI where it earns its keep: test design, defect clustering, log analysis, visual regression. With the guardrails that keep it from generating confident nonsense.</p>
+        <span class="tag" data-es="Implementación y capacitación">Setup &amp; enablement</span>
+        <h3 data-es="QA potenciado con IA">AI-augmented QA</h3>
+        <p data-es="Poniendo la IA donde realmente rinde: diseño de pruebas, agrupación de defectos, análisis de logs, regresión visual. Con los controles que evitan que genere resultados convincentes pero incorrectos.">Putting AI where it earns its keep: test design, defect clustering, log analysis, visual regression. With the guardrails that keep it from generating confident nonsense.</p>
       </article>
       <article>
-        <span class="tag">Hands-on</span>
-        <h3>UAT &amp; regression for fintech</h3>
-        <p>API and end-to-end testing, UAT coordination with business stakeholders, traceability and evidence packs that survive an audit.</p>
+        <span class="tag" data-es="Práctico">Hands-on</span>
+        <h3 data-es="UAT y regresión para fintech">UAT &amp; regression for fintech</h3>
+        <p data-es="Pruebas de API y end-to-end, coordinación de UAT con las áreas de negocio, trazabilidad y evidencia que resiste una auditoría.">API and end-to-end testing, UAT coordination with business stakeholders, traceability and evidence packs that survive an audit.</p>
       </article>
     </div>
 
     <div class="sample">
       <div class="sample-text">
         <span class="tag">QA Audit Express</span>
-        <h3>See a full sample audit before you hire</h3>
-        <p>A real QA audit — functional testing, API validation and an automated WCAG 2.1&nbsp;AA accessibility scan. 23 findings ranked by severity, with evidence, probable root cause and a recommended fix for each. This is my own product, audited with the same method and format I deliver to clients.</p>
+        <h3 data-es="Mira una auditoría de muestra completa antes de contratar">See a full sample audit before you hire</h3>
+        <p data-es="Una auditoría de QA real — pruebas funcionales, validación de API y un escaneo automatizado de accesibilidad WCAG 2.1 AA. 23 hallazgos clasificados por severidad, con evidencia, causa raíz probable y una solución recomendada para cada uno. Es mi propio producto, auditado con el mismo método y formato que entrego a mis clientes.">A real QA audit — functional testing, API validation and an automated WCAG 2.1&nbsp;AA accessibility scan. 23 findings ranked by severity, with evidence, probable root cause and a recommended fix for each. This is my own product, audited with the same method and format I deliver to clients.</p>
       </div>
       <a class="sample-btn" href="QA-Audit-Sample-Report.pdf" download>
-        <span class="sample-btn-label">Download sample report</span>
-        <span class="sample-btn-meta">PDF · 8 pages</span>
+        <span class="sample-btn-label" data-es="Descargar reporte de muestra">Download sample report</span>
+        <span class="sample-btn-meta" data-es="PDF · 8 páginas">PDF · 8 pages</span>
       </a>
     </div>
 
     <div class="pricing">
       <div class="price-card">
-        <span class="price-badge">Founder price · 5 spots</span>
+        <span class="price-badge" data-es="Precio de lanzamiento · 5 lugares">Founder price · 5 spots</span>
         <h3 class="price-tier">Express</h3>
         <p class="price-amount">$25 <span>USD</span></p>
-        <p class="price-desc">One screen or user flow. Functional bugs, accessibility issues and UX findings — documented with evidence and a recommended fix for each.</p>
-        <span class="price-meta">Delivered in 48h</span>
-        <a class="price-cta" href="mailto:clauliz.acosta@gmail.com?subject=QA%20Audit%20Express">Book this →</a>
+        <p class="price-desc" data-es="Una pantalla o flujo de usuario. Bugs funcionales, problemas de accesibilidad y hallazgos de UX — documentados con evidencia y una solución recomendada para cada uno.">One screen or user flow. Functional bugs, accessibility issues and UX findings — documented with evidence and a recommended fix for each.</p>
+        <span class="price-meta" data-es="Entrega en 48h">Delivered in 48h</span>
+        <a class="price-cta" href="mailto:clauliz.acosta@gmail.com?subject=QA%20Audit%20Express" data-es="Reservar →">Book this →</a>
       </div>
       <div class="price-card featured">
-        <span class="price-badge">Most requested</span>
+        <span class="price-badge" data-es="Más solicitado">Most requested</span>
         <h3 class="price-tier">Growth</h3>
         <p class="price-amount">$60 <span>USD</span></p>
-        <p class="price-desc">Up to 3 screens or flows — signup, checkout, dashboard, whatever matters most. Same depth as Express, across the parts of your product users hit first.</p>
-        <span class="price-meta">Delivered in 3–4 days</span>
-        <a class="price-cta" href="mailto:clauliz.acosta@gmail.com?subject=QA%20Audit%20Growth">Book this →</a>
+        <p class="price-desc" data-es="Hasta 3 pantallas o flujos — registro, checkout, dashboard, lo que más importe. La misma profundidad que Express, cubriendo las partes de tu producto que los usuarios tocan primero.">Up to 3 screens or flows — signup, checkout, dashboard, whatever matters most. Same depth as Express, across the parts of your product users hit first.</p>
+        <span class="price-meta" data-es="Entrega en 3–4 días">Delivered in 3–4 days</span>
+        <a class="price-cta" href="mailto:clauliz.acosta@gmail.com?subject=QA%20Audit%20Growth" data-es="Reservar →">Book this →</a>
       </div>
       <div class="price-card">
-        <span class="price-badge">Full coverage</span>
+        <span class="price-badge" data-es="Cobertura completa">Full coverage</span>
         <h3 class="price-tier">Complete</h3>
         <p class="price-amount">From $150 <span>USD</span></p>
-        <p class="price-desc">Every main flow in your application: functional, accessibility and UX, plus an executive summary report like the sample above.</p>
-        <span class="price-meta">Delivered in 7–10 days · scoped on a 15-min call</span>
-        <a class="price-cta" href="https://calendly.com/claudia-achd/30min" target="_blank" rel="noopener">Scope a call →</a>
+        <p class="price-desc" data-es="Cada flujo principal de tu aplicación: funcional, accesibilidad y UX, más un reporte ejecutivo como el de la muestra de arriba.">Every main flow in your application: functional, accessibility and UX, plus an executive summary report like the sample above.</p>
+        <span class="price-meta" data-es="Entrega en 7–10 días · alcance definido en una llamada de 15 min">Delivered in 7–10 days · scoped on a 15-min call</span>
+        <a class="price-cta" href="https://calendly.com/claudia-achd/30min" target="_blank" rel="noopener" data-es="Agenda una llamada →">Scope a call →</a>
       </div>
     </div>
 
-    <div class="price-guarantee">If the report doesn't turn up anything actionable, <strong>you don't pay.</strong></div>
+    <div class="price-guarantee" data-es="Si el reporte no encuentra nada accionable, <strong>no pagas.</strong>">If the report doesn't turn up anything actionable, <strong>you don't pay.</strong></div>
 
     <div class="price-info">
       <div>
-        <h4>What I need from you</h4>
+        <h4 data-es="Qué necesito de ti">What I need from you</h4>
         <ul>
-          <li>A link to the live site, staging build or TestFlight/APK</li>
-          <li>Test credentials, if the flow requires login</li>
-          <li>Which screen or flow to focus on (or "you tell me" for Complete)</li>
+          <li data-es="Un link al sitio en vivo, build de staging o TestFlight/APK">A link to the live site, staging build or TestFlight/APK</li>
+          <li data-es="Credenciales de prueba, si el flujo requiere inicio de sesión">Test credentials, if the flow requires login</li>
+          <li data-es='Qué pantalla o flujo enfocar (o "tú decides" para el paquete Completo)'>Which screen or flow to focus on (or "you tell me" for Complete)</li>
         </ul>
       </div>
       <div>
-        <h4>Questions people ask</h4>
+        <h4 data-es="Preguntas frecuentes">Questions people ask</h4>
         <dl class="faq">
-          <dt>Do you need access to my codebase?</dt>
-          <dd>No — just the running app or a staging link. I test it the way a real user would hit it.</dd>
-          <dt>What if my product needs more than 3 screens?</dt>
-          <dd>That's the Complete package — I scope it on a 15-minute call so the price matches the actual size.</dd>
-          <dt>How do I get the results?</dt>
-          <dd>A PDF report, same format as the sample above: findings ranked by severity, evidence and a recommended fix for each.</dd>
+          <dt data-es="¿Necesitas acceso a mi código?">Do you need access to my codebase?</dt>
+          <dd data-es="No — solo la app en funcionamiento o un link de staging. La pruebo como la usaría un usuario real.">No — just the running app or a staging link. I test it the way a real user would hit it.</dd>
+          <dt data-es="¿Y si mi producto necesita más de 3 pantallas?">What if my product needs more than 3 screens?</dt>
+          <dd data-es="Ese es el paquete Completo — defino el alcance en una llamada de 15 minutos para que el precio corresponda al tamaño real.">That's the Complete package — I scope it on a 15-minute call so the price matches the actual size.</dd>
+          <dt data-es="¿Cómo recibo los resultados?">How do I get the results?</dt>
+          <dd data-es="Un reporte en PDF, mismo formato que la muestra de arriba: hallazgos clasificados por severidad, evidencia y una solución recomendada para cada uno.">A PDF report, same format as the sample above: findings ranked by severity, evidence and a recommended fix for each.</dd>
         </dl>
       </div>
     </div>
@@ -459,15 +470,15 @@
   <div class="wrap">
     <div class="band">
       <span class="num">03</span>
-      <h2>I also build</h2>
-      <span class="note">Side project, in production</span>
+      <h2 data-es="También construyo">I also build</h2>
+      <span class="note" data-es="Proyecto propio, en producción">Side project, in production</span>
     </div>
 
     <div class="built">
       <div>
         <h3>Dragonflai Events</h3>
-        <p>An AI event-planning product I designed, built, tested and shipped myself. It generates a timeline, a budget and a digital invitation with RSVP, guided by an in-app planner assistant. Live, with real users and Stripe payments.</p>
-        <p>I ran it the way I run a client release: milestone branches, deploy previews, a documented findings log per version, and a beta program with real testers. Fifteen years of telling engineers what broke, spent on my own product.</p>
+        <p data-es="Un producto de planeación de eventos con IA que diseñé, construí, probé y lancé yo misma. Genera un cronograma, un presupuesto y una invitación digital con RSVP, guiado por una asistente de planeación dentro de la app. En producción, con usuarios reales y pagos con Stripe.">An AI event-planning product I designed, built, tested and shipped myself. It generates a timeline, a budget and a digital invitation with RSVP, guided by an in-app planner assistant. Live, with real users and Stripe payments.</p>
+        <p data-es="Lo manejé igual que manejo el release de un cliente: ramas por milestone, previews de despliegue, una bitácora documentada de hallazgos por versión, y un programa beta con testers reales. Trece años diciéndole a otros ingenieros qué se rompió, aplicados ahora a mi propio producto.">I ran it the way I run a client release: milestone branches, deploy previews, a documented findings log per version, and a beta program with real testers. Fifteen years of telling engineers what broke, spent on my own product.</p>
         <ul class="stack">
           <li>React</li><li>Netlify</li><li>Stripe</li><li>Claude API</li><li>GitHub</li>
         </ul>
@@ -481,21 +492,21 @@
   <div class="wrap">
     <div class="band">
       <span class="num">04</span>
-      <h2>Toolkit</h2>
-      <span class="note">Day to day</span>
+      <h2 data-es="Herramientas">Toolkit</h2>
+      <span class="note" data-es="Día a día">Day to day</span>
     </div>
     <div class="kit">
       <div>
-        <h4>Testing</h4>
-        <p>Manual and exploratory, API testing with Postman and SOAP UI, UAT, regression, smoke, end-to-end, accessibility. Python for smoke automation, Selenium, SQL Server, DB2, AS/400.</p>
+        <h4 data-es="Pruebas">Testing</h4>
+        <p data-es="Manuales y exploratorias, pruebas de API con Postman y SOAP UI, UAT, regresión, smoke, end-to-end, accesibilidad. Python para automatización de smoke, Selenium, SQL Server, DB2, AS/400.">Manual and exploratory, API testing with Postman and SOAP UI, UAT, regression, smoke, end-to-end, accessibility. Python for smoke automation, Selenium, SQL Server, DB2, AS/400.</p>
       </div>
       <div>
-        <h4>Release</h4>
-        <p>Azure DevOps, Jira, Confluence. Release planning, cutover execution, risk and change management, incident tracking, deployment coordination across teams and time zones.</p>
+        <h4 data-es="Releases">Release</h4>
+        <p data-es="Azure DevOps, Jira, Confluence. Planeación de releases, ejecución de cutover, gestión de riesgos y cambios, seguimiento de incidentes, coordinación de despliegue entre equipos y zonas horarias.">Azure DevOps, Jira, Confluence. Release planning, cutover execution, risk and change management, incident tracking, deployment coordination across teams and time zones.</p>
       </div>
       <div>
-        <h4>AI in QA</h4>
-        <p>Claude, GitHub Copilot, Applitools Visual AI, Postman AI, Sentry AI, TestRail AI, Testsigma, LambdaTest — used in production work, not in a course.</p>
+        <h4 data-es="IA en QA">AI in QA</h4>
+        <p data-es="Claude, GitHub Copilot, Applitools Visual AI, Postman AI, Sentry AI, TestRail AI, Testsigma, LambdaTest — usados en trabajo real de producción, no en un curso.">Claude, GitHub Copilot, Applitools Visual AI, Postman AI, Sentry AI, TestRail AI, Testsigma, LambdaTest — used in production work, not in a course.</p>
       </div>
     </div>
   </div>
@@ -505,18 +516,18 @@
   <div class="wrap contact-inner">
     <div class="band">
       <span class="num">05</span>
-      <h2>Work with me</h2>
+      <h2 data-es="Trabajemos juntos">Work with me</h2>
       <span class="note">Querétaro, MX — CST</span>
     </div>
     <div class="contact-grid">
       <div>
-        <h2>Tell me what's about to ship.</h2>
-        <p>Freelance engagements, contract work, and full-time remote roles. Bilingual — Spanish native, English C1. ISTQB Foundation and Scrum Master certified.</p>
+        <h2 data-es="Cuéntame qué está por salir a producción.">Tell me what's about to ship.</h2>
+        <p data-es="Proyectos freelance, trabajo por contrato y roles remotos de tiempo completo. Bilingüe — español nativo, inglés C1. Certificada en ISTQB Foundation y Scrum Master.">Freelance engagements, contract work, and full-time remote roles. Bilingual — Spanish native, English C1. ISTQB Foundation and Scrum Master certified.</p>
       </div>
       <div class="links">
-        <a href="mailto:clauliz.acosta@gmail.com"><span class="k">Email</span> clauliz.acosta@gmail.com</a>
-        <a href="https://www.linkedin.com/in/claudia-lizeth-acosta-hernandez-8287b355" target="_blank" rel="noopener"><span class="k">LinkedIn</span> View profile →</a>
-        <a href="CV_Claudia_Acosta.pdf" download><span class="k">Résumé</span> Download PDF →</a>
+        <a href="mailto:clauliz.acosta@gmail.com" data-es='<span class="k">Correo</span> clauliz.acosta@gmail.com'><span class="k">Email</span> clauliz.acosta@gmail.com</a>
+        <a href="https://www.linkedin.com/in/claudia-lizeth-acosta-hernandez-8287b355" target="_blank" rel="noopener" data-es='<span class="k">LinkedIn</span> Ver perfil →'><span class="k">LinkedIn</span> View profile →</a>
+        <a href="CV_Claudia_Acosta.pdf" download data-es='<span class="k">CV</span> Descargar PDF →'><span class="k">Résumé</span> Download PDF →</a>
       </div>
     </div>
   </div>
@@ -525,9 +536,34 @@
 <footer>
   <div class="wrap">
     <span>Claudia Lizeth Acosta Hernández</span>
-    <span>QA &amp; Release Management · Banking &amp; Fintech</span>
+    <span data-es="QA y Gestión de Releases · Banca y Fintech">QA &amp; Release Management · Banking &amp; Fintech</span>
   </div>
 </footer>
+
+<script>
+(function(){
+  function setLang(lang){
+    document.querySelectorAll('[data-es]').forEach(function(el){
+      if(el.dataset.en === undefined){ el.dataset.en = el.innerHTML; }
+      el.innerHTML = lang === 'es' ? el.dataset.es : el.dataset.en;
+    });
+    document.documentElement.lang = lang;
+    var btn = document.getElementById('langToggle');
+    if(btn){ btn.textContent = lang === 'es' ? 'EN' : 'ES'; }
+    try{ localStorage.setItem('dfai_lang', lang); }catch(e){}
+  }
+  var btn = document.getElementById('langToggle');
+  if(btn){
+    btn.addEventListener('click', function(){
+      var current = document.documentElement.lang === 'es' ? 'es' : 'en';
+      setLang(current === 'es' ? 'en' : 'es');
+    });
+  }
+  var saved = null;
+  try{ saved = localStorage.getItem('dfai_lang'); }catch(e){}
+  if(saved === 'es'){ setLang('es'); }
+})();
+</script>
 
 </body>
 </html>
