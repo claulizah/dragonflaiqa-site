@@ -5,6 +5,53 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Claudia Acosta — QA &amp; Release Management for Fintech</title>
 <meta name="description" content="Senior QA Engineer and Release Manager. 13+ years in banking and fintech — Citi, HSBC, Banorte, AXA, UL Solutions. 25+ production releases, zero major rollbacks. Available for freelance and remote roles.">
+<link rel="canonical" href="https://dragonflaiqa.com/">
+
+<!-- Favicon -->
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+<!-- Open Graph / Facebook / LinkedIn -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://dragonflaiqa.com/">
+<meta property="og:title" content="Claudia Acosta — QA & Release Management for Fintech">
+<meta property="og:description" content="Senior QA Engineer and Release Manager. 13+ years in banking and fintech — Citi, HSBC, Banorte, AXA, UL Solutions. 25+ production releases, zero major rollbacks.">
+<meta property="og:image" content="https://dragonflaiqa.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="es_MX">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Claudia Acosta — QA & Release Management for Fintech">
+<meta name="twitter:description" content="Senior QA Engineer and Release Manager. 13+ years in banking and fintech — Citi, HSBC, Banorte, AXA, UL Solutions.">
+<meta name="twitter:image" content="https://dragonflaiqa.com/og-image.png">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Claudia Lizeth Acosta Hernández",
+  "alternateName": "Claudia Acosta",
+  "url": "https://dragonflaiqa.com/",
+  "image": "https://dragonflaiqa.com/og-image.png",
+  "jobTitle": "QA Engineer & Release Manager",
+  "description": "Senior QA Engineer and Release Manager with 13+ years in banking and fintech.",
+  "email": "mailto:clauliz.acosta@gmail.com",
+  "knowsLanguage": ["es", "en"],
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Querétaro",
+    "addressCountry": "MX"
+  },
+  "sameAs": [
+    "https://www.linkedin.com/in/claudia-lizeth-acosta-hernandez-8287b355"
+  ],
+  "knowsAbout": ["QA Engineering", "Release Management", "Cutover Management", "Fintech", "Banking Software Testing", "AI-augmented QA"]
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -222,6 +269,15 @@
   }
   .built a.visit:hover{color:#fff;border-color:#fff;}
 
+  /* ---------- hero cta ---------- */
+  .hero-cta{
+    display:inline-flex;align-items:center;gap:10px;margin:22px 0 4px;
+    font-family:var(--mono);font-size:13px;font-weight:600;letter-spacing:.04em;
+    background:var(--signal);color:var(--ink);text-decoration:none;
+    padding:13px 22px;border-radius:999px;transition:background .18s ease,color .18s ease;
+  }
+  .hero-cta:hover{background:#fff;color:var(--ink);}
+
   /* ---------- toolkit ---------- */
   .kit{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
   .kit h4{
@@ -247,6 +303,10 @@
   .links a span.k{color:var(--muted);font-size:11px;letter-spacing:.14em;text-transform:uppercase;}
   .links a:hover{background:var(--ink);color:#fff;}
   .links a:hover span.k{color:var(--signal);}
+  .links a.primary{background:var(--signal);color:var(--ink);font-weight:600;}
+  .links a.primary span.k{color:var(--ink-soft);}
+  .links a.primary:hover{background:var(--ink);color:#fff;}
+  .links a.primary:hover span.k{color:var(--signal);}
 
   footer{border-top:1px solid var(--line);padding:26px 0;}
   footer .wrap{
@@ -291,6 +351,8 @@
     <h1 data-es="Alguien tiene que decidir si algo sale a producción. En banca, esa persona he sido <em>yo</em> durante 13 años.">Someone has to decide whether it ships. In banking, that's been <em>me</em> for 13 years.</h1>
     <p class="lede" data-es="Planeo y ejecuto los releases que no pueden fallar — banca core, pagos, apertura de cuentas — y construyo el proceso de QA que los lleva ahí. <strong>Citi. HSBC. Banorte. AXA. UL Solutions.</strong>">I plan and run the releases that can't fail — core banking, payments, account opening — and I build the QA process that gets them there. <strong>Citi. HSBC. Banorte. AXA. UL Solutions.</strong></p>
     <p class="lede" data-es="Actualmente disponible para freelance, proyectos por contrato, y abierta a roles remotos.">Now taking freelance and contract work, and open to remote roles.</p>
+
+    <a class="hero-cta" href="https://calendly.com/clauliz-acosta/30min" target="_blank" rel="noopener" data-es="Agendar una llamada de 30 min →">Book a 30-min call →</a>
 
     <div class="board">
       <div class="board-head"><span data-es="Historial de releases">Career release record</span><span data-es="2010 — presente">2010 — present</span></div>
@@ -525,9 +587,10 @@
         <p data-es="Proyectos freelance, trabajo por contrato y roles remotos de tiempo completo. Bilingüe — español nativo, inglés C1. Certificada en ISTQB Foundation y Scrum Master.">Freelance engagements, contract work, and full-time remote roles. Bilingual — Spanish native, English C1. ISTQB Foundation and Scrum Master certified.</p>
       </div>
       <div class="links">
+        <a class="primary" href="https://calendly.com/clauliz-acosta/30min" target="_blank" rel="noopener" data-es='<span class="k">Llamada</span> Agendar 30 min →'><span class="k">Call</span> Book 30 min →</a>
         <a href="mailto:clauliz.acosta@gmail.com" data-es='<span class="k">Correo</span> clauliz.acosta@gmail.com'><span class="k">Email</span> clauliz.acosta@gmail.com</a>
         <a href="https://www.linkedin.com/in/claudia-lizeth-acosta-hernandez-8287b355" target="_blank" rel="noopener" data-es='<span class="k">LinkedIn</span> Ver perfil →'><span class="k">LinkedIn</span> View profile →</a>
-        <a href="CV_Claudia_Acosta.pdf" download data-es='<span class="k">CV</span> Descargar PDF →'><span class="k">Résumé</span> Download PDF →</a>
+        <a href="CV-Claudia-Acosta-Hernandez.pdf" download data-es='<span class="k">CV</span> Descargar PDF →'><span class="k">Résumé</span> Download PDF →</a>
       </div>
     </div>
   </div>
