@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Claudia Acosta — QA Engineer, Release Manager &amp; AI QA</title>
-<meta name="description" content="Senior QA Engineer, Release Manager and AI QA. 14+ years in banking and fintech — Citi, HSBC, BBVA, Banorte, AXA, UL Solutions. 25+ releases, zero major rollbacks.">
+<meta name="description" content="Senior QA Engineer &amp; Release Manager. 14+ years at Citi, HSBC, BBVA, Banorte and AXA. 25+ production releases, zero major rollbacks. AI-augmented QA." data-es-content="QA Engineer y Release Manager Senior. 14+ años en Citi, HSBC, BBVA, Banorte y AXA. 25+ releases a producción, cero rollbacks mayores. QA con IA.">
 <link rel="canonical" href="https://dragonflaiqa.com/">
 
 <!-- Favicon -->
@@ -17,7 +17,7 @@
 <meta property="og:type" content="profile">
 <meta property="og:url" content="https://dragonflaiqa.com/">
 <meta property="og:title" content="Claudia Acosta — QA Engineer, Release Manager & AI QA">
-<meta property="og:description" content="Senior QA Engineer, Release Manager and AI QA. 14+ years in banking and fintech — Citi, HSBC, BBVA, Banorte, AXA, UL Solutions. 25+ releases, zero major rollbacks.">
+<meta property="og:description" content="Senior QA Engineer &amp; Release Manager. 14+ years at Citi, HSBC, BBVA, Banorte and AXA. 25+ production releases, zero major rollbacks. AI-augmented QA.">
 <meta property="og:image" content="https://dragonflaiqa.com/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -27,7 +27,7 @@
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Claudia Acosta — QA Engineer, Release Manager & AI QA">
-<meta name="twitter:description" content="Senior QA Engineer, Release Manager and AI QA. 14+ years in banking and fintech — Citi, HSBC, BBVA, Banorte, AXA, UL Solutions.">
+<meta name="twitter:description" content="Senior QA Engineer &amp; Release Manager. 14+ years at Citi, HSBC, BBVA, Banorte and AXA. 25+ production releases, zero major rollbacks. AI-augmented QA.">
 <meta name="twitter:image" content="https://dragonflaiqa.com/og-image.png">
 
 <script type="application/ld+json">
@@ -261,7 +261,7 @@
 
   /* ---------- products (I also build) ---------- */
   .products{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:#3A4658;border:1px solid var(--ink);}
-  .products>.product:nth-child(odd):last-child{grid-column:1/-1;} /* odd count: last card spans full row */
+  .products>.product.span-row{grid-column:1/-1;} /* set by JS on the last visible card when the count is odd */
   .product{background:var(--ink);color:#fff;padding:32px 30px;display:flex;flex-direction:column;gap:14px;}
   .product-top{display:flex;align-items:center;flex-wrap:wrap;gap:8px 12px;}
   .product h3{font-family:var(--display);font-size:1.4rem;font-weight:700;margin:0;letter-spacing:-.015em;}
@@ -607,6 +607,16 @@
 
     <div class="products">
       <article class="product">
+        <div class="product-top"><h3>DragonflAI QA Toolkit</h3></div>
+        <p data-es="Dashboard local en Node/Express con 8 agentes de QA potenciados con Claude, 7 de ellos en el dashboard: tests de Playwright, casos de prueba de API, escaneo de accesibilidad con axe-core, revisión de UX/UI por captura, casos de prueba funcionales, reportes de bugs y el reporte final de auditoría en Word.">A local Node/Express dashboard with 8 Claude-powered QA agents, 7 of them in the dashboard: Playwright tests, API test cases, axe-core accessibility scans, UX/UI review from screenshots, functional test cases, bug reports and the final Word audit report.</p>
+        <p class="quality" data-es="<b>Calidad</b> El escaneo de accesibilidad corre axe-core real sobre la página en vivo; Claude solo resume los hallazgos y tiene prohibido inventar violaciones."><b>Quality</b> The accessibility scan runs real axe-core on the live page; Claude only summarizes the findings and is told never to invent violations.</p>
+        <ul class="stack">
+          <li>Node.js</li><li>Express</li><li>Claude API</li><li>Playwright</li><li>axe-core</li><li>docx</li>
+        </ul>
+        <a class="visit" href="QA-Audit-Sample-Report.pdf" download data-es="Reporte de muestra (PDF) →">Sample report (PDF) →</a>
+      </article>
+
+      <article class="product">
         <div class="product-top"><h3>Dragonflai Events</h3></div>
         <p data-es="Un producto de planeación de eventos con IA que diseñé, construí, probé y lancé yo misma. Genera un cronograma, un presupuesto y una invitación digital con RSVP, guiado por una asistente de planeación dentro de la app. En producción, con usuarios reales y pagos con Stripe.">An AI event-planning product I designed, built, tested and shipped myself. It generates a timeline, a budget and a digital invitation with RSVP, guided by an in-app planner assistant. Live, with real users and Stripe payments.</p>
         <p class="quality" data-es="<b>Calidad</b> Manejado como el release de un cliente: ramas por milestone, previews de despliegue, bitácora de hallazgos por versión y un programa beta con testers reales."><b>Quality</b> Run like a client release: milestone branches, deploy previews, a findings log per version and a beta program with real testers.</p>
@@ -816,6 +826,10 @@ var CF_ANALYTICS_TOKEN = '';
     num.textContent = (n < 10 ? '0' : '') + n;
   });
 
+  // 2b. Product grid: if an odd number of cards is visible, the last one spans the full row
+  var cards = [].filter.call(document.querySelectorAll('.products > .product'), function(c){ return !c.hidden; });
+  if(cards.length % 2 === 1){ cards[cards.length - 1].classList.add('span-row'); }
+
   // 3. Cloudflare Web Analytics (only when a token is set)
   if(CF_ANALYTICS_TOKEN){
     var cf = document.createElement('script');
@@ -835,6 +849,10 @@ var CF_ANALYTICS_TOKEN = '';
     document.querySelectorAll('[data-es-alt]').forEach(function(el){
       if(el.dataset.enAlt === undefined){ el.dataset.enAlt = el.alt; }
       el.alt = lang === 'es' ? el.dataset.esAlt : el.dataset.enAlt;
+    });
+    document.querySelectorAll('[data-es-content]').forEach(function(el){
+      if(el.dataset.enContent === undefined){ el.dataset.enContent = el.content; }
+      el.content = lang === 'es' ? el.dataset.esContent : el.dataset.enContent;
     });
     document.documentElement.lang = lang;
     var btn = document.getElementById('langToggle');
